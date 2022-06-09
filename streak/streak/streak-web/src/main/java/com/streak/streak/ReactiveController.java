@@ -1,15 +1,10 @@
 package com.streak.streak;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Duration;
 import java.util.Map;
 
 @RestController
@@ -18,9 +13,12 @@ import java.util.Map;
 public class ReactiveController {
 
     CallsCounterService callsCounterService;
+    RedissonService redissonService;
 
-    public ReactiveController(CallsCounterService callsCounterService) {
+    public ReactiveController(CallsCounterService callsCounterService,
+                              RedissonService redissonService) {
         this.callsCounterService = callsCounterService;
+        this.redissonService = redissonService;
     }
 
     @GetMapping(path = "/")
@@ -38,6 +36,20 @@ public class ReactiveController {
         callsCounterService.add(methodMapping);
 
         return 	22;
+    }
+
+    @PreAuthorize("permitAll()")
+    @GetMapping(path = "/push")
+    public String redisson(@RequestParam String key, @RequestParam String value) {
+        redissonService.push(key, value);
+
+        return "Pushed";
+    }
+
+    @PreAuthorize("permitAll()")
+    @GetMapping(path = "/get")
+    public String getRedisson(@RequestParam String key) {
+        return redissonService.get(key);
     }
 
     @PreAuthorize("permitAll()")
@@ -62,9 +74,9 @@ public class ReactiveController {
         calls.forEach(
                 (url, count) -> {
                     String prom_name = url.replace("/","gabi_");
-                    response.append("# HELP " + prom_name + " The peak live thread count since the Java virtual machine started or peak was reset\n");
-                    response.append("# TYPE " + prom_name + " gauge\n");
-                    response.append(prom_name + " " + count + "\n");
+                    response.append("# HELP ").append(prom_name).append(" The peak live thread count since the Java virtual machine started or peak was reset\n");
+                    response.append("# TYPE ").append(prom_name).append(" gauge\n");
+                    response.append(prom_name).append(" ").append(count).append("\n");
                 }
         );
 

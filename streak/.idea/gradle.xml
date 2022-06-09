@@ -10,6 +10,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/streak" />
+            <option value="$PROJECT_DIR$/streak/streak-client" />
+            <option value="$PROJECT_DIR$/streak/streak-web" />
           </set>
         </option>
       </GradleProjectSettings>
