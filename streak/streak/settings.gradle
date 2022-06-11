@@ -1,4 +1,12 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://repo.spring.io/release' }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
 rootProject.name = 'streak-root'
 include(':streak-web')
 include(':streak-client')
+include(':serverless')
 
