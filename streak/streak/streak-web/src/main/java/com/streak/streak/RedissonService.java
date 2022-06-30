@@ -16,7 +16,8 @@ public class RedissonService {
         config.useSingleServer()
                 //useClusterServers()
 //                // use "rediss://" for SSL connection
-                .setAddress("redis://localhost:6379");
+                //.setAddress("redis://localhost:6379");
+                .setAddress("redis://redis:6379");
 //
 //        // Sync and Async API
         RedissonClient redisson = Redisson.create(config);

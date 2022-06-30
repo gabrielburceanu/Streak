@@ -25,11 +25,11 @@ public class ReactiveController {
     public String index () {
         String methodMapping = new Object(){}.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
         callsCounterService.add(methodMapping);
-        return "index page";
+        return "Streak-web index page";
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping(path = "/number")
+    @GetMapping(path = "/some-number")
     public Integer number() {
 
         String methodMapping = new Object(){}.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
