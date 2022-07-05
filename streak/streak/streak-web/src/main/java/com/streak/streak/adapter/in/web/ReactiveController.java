@@ -1,5 +1,9 @@
-package com.streak.streak;
+package com.streak.streak.adapter.in.web;
 
+import com.streak.streak.application.port.in.CallsCounterService;
+import com.streak.streak.application.port.in.DistributedMapService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,18 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
+@AllArgsConstructor
 @PreAuthorize("permitAll()")
 //@PreAuthorize("isAuthenticated()")
 public class ReactiveController {
 
-    CallsCounterService callsCounterService;
-    RedissonService redissonService;
-
-    public ReactiveController(CallsCounterService callsCounterService,
-                              RedissonService redissonService) {
-        this.callsCounterService = callsCounterService;
-        this.redissonService = redissonService;
-    }
+    private final CallsCounterService callsCounterService;
+    private final DistributedMapService redissonService;
 
     @GetMapping(path = "/")
     public String index () {
@@ -41,7 +40,7 @@ public class ReactiveController {
     @PreAuthorize("permitAll()")
     @GetMapping(path = "/push")
     public String redisson(@RequestParam String key, @RequestParam String value) {
-        redissonService.push(key, value);
+        redissonService.put(key, value);
 
         return "Pushed";
     }
