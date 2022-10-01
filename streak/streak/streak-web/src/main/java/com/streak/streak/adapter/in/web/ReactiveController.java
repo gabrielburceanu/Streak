@@ -3,7 +3,6 @@ package com.streak.streak.adapter.in.web;
 import com.streak.streak.application.port.in.CallsCounterService;
 import com.streak.streak.application.port.in.DistributedMapService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,8 +20,9 @@ public class ReactiveController {
     private final DistributedMapService redissonService;
 
     @GetMapping(path = "/")
-    public String index () {
-        String methodMapping = new Object(){}.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
+    public String index() {
+        String methodMapping = new Object() {
+        }.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
         callsCounterService.add(methodMapping);
         return "Streak-web index page";
     }
@@ -31,10 +31,11 @@ public class ReactiveController {
     @GetMapping(path = "/some-number")
     public Integer number() {
 
-        String methodMapping = new Object(){}.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
+        String methodMapping = new Object() {
+        }.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
         callsCounterService.add(methodMapping);
 
-        return 	22;
+        return 22;
     }
 
     @PreAuthorize("permitAll()")
@@ -57,7 +58,8 @@ public class ReactiveController {
         GetMapping annotation = new Object() {
         }.getClass().getEnclosingMethod().getAnnotation(GetMapping.class);
 
-        String methodMapping = new Object(){}.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
+        String methodMapping = new Object() {
+        }.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
         callsCounterService.add(methodMapping);
 
         return 7777;
@@ -65,14 +67,14 @@ public class ReactiveController {
 
     @PreAuthorize("permitAll()")
     @GetMapping(path = "/custom_prometheus",
-            produces="text/plain")
+            produces = "text/plain")
     public String customPrometheus() {
         Map<String, Integer> calls = callsCounterService.getCalls();
 
         StringBuilder response = new StringBuilder();
         calls.forEach(
                 (url, count) -> {
-                    String prom_name = url.replace("/","gabi_");
+                    String prom_name = url.replace("/", "gabi_");
                     response.append("# HELP ").append(prom_name).append(" The peak live thread count since the Java virtual machine started or peak was reset\n");
                     response.append("# TYPE ").append(prom_name).append(" gauge\n");
                     response.append(prom_name).append(" ").append(count).append("\n");
@@ -87,7 +89,8 @@ public class ReactiveController {
     @GetMapping(path = "/admin")
     public String adminReactive() {
 
-        String methodMapping = new Object(){}.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
+        String methodMapping = new Object() {
+        }.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
         callsCounterService.add(methodMapping);
         return "Who is big admin ?";
     }

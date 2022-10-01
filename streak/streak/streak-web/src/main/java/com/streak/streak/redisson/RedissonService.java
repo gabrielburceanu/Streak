@@ -8,13 +8,8 @@ import org.redisson.client.RedisConnectionException;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -30,7 +25,7 @@ public class RedissonService implements DistributedMapService {
         this.redisUrl = redisUrl;
         try {
             initRedis();
-        } catch(RedisConnectionException ex) {
+        } catch (RedisConnectionException ex) {
             log.error("Redis failed to connect, using mock");
             map = new ConcurrentHashMap<>();
         }
