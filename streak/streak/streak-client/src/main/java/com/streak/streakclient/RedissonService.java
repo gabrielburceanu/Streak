@@ -1,32 +1,22 @@
-package com.streak.streak.redisson;
+package com.streak.streakclient;
 
-import com.streak.streak.application.port.in.DistributedMapService;
-import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.client.RedisConnectionException;
 import org.redisson.config.Config;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+//import org.redisson.*;
 
-@Slf4j
-@Service
-public class RedissonService implements DistributedMapService {
-
-    private final String redisUrl;
-    private ConcurrentMap<String, String> map;
-
-    @Autowired
-    public RedissonService(@Value("${redis.url}") String redisUrl) {
-        this.redisUrl = redisUrl;
+@Component
+public class RedissonService {
+    ConcurrentMap<String, String> map;
+    public RedissonService() {
         try {
             initRedis();
-        } catch (RedisConnectionException ex) {
-            log.error("Redis failed to connect, using mock");
+        } catch(RedisConnectionException ex) {
             map = new ConcurrentHashMap<>();
         }
     }
@@ -38,7 +28,7 @@ public class RedissonService implements DistributedMapService {
         config.useSingleServer()
                 //useClusterServers()
 //                // use "rediss://" for SSL connection
-                .setAddress(redisUrl);
+                .setAddress("redis://localhost:6379");
 //
 //        // Sync and Async API
         RedissonClient redisson = Redisson.create(config);
@@ -50,13 +40,11 @@ public class RedissonService implements DistributedMapService {
 ////        config = Config.fromYAML(new File("config-file.yaml"));
     }
 
-    @Override
-    public void put(String key, String value) {
+    void push(String key, String value) {
         map.put(key, value);
     }
 
-    @Override
-    public String get(String key) {
+    String get(String key) {
         return map.get(key);
     }
 }

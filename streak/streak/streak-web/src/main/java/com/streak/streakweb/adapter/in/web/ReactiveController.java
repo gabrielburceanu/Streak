@@ -1,7 +1,7 @@
-package com.streak.streak.adapter.in.web;
+package com.streak.streakweb.adapter.in.web;
 
-import com.streak.streak.application.port.in.CallsCounterService;
-import com.streak.streak.application.port.in.DistributedMapService;
+import com.streak.streakweb.application.port.in.CallsCounterService;
+import com.streak.streakweb.application.port.in.DistributedMapService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

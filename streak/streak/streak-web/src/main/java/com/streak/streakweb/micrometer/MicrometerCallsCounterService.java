@@ -1,9 +1,8 @@
-package com.streak.streak.micrometer;
+package com.streak.streakweb.micrometer;
 
-import com.streak.streak.application.port.in.CallsCounterService;
+import com.streak.streakweb.application.port.in.CallsCounterService;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;

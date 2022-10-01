@@ -1,4 +1,4 @@
-package com.streak.streak;
+package com.streak.streakclient;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,7 +7,7 @@ import reactor.core.publisher.Flux;
 import java.time.Duration;
 
 @SpringBootTest
-class StreakApplicationTests {
+class StreakClientApplicationTests {
 
 	@Test
 	void contextLoads() {

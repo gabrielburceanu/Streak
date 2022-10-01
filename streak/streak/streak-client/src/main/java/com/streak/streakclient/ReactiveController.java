@@ -1,12 +1,9 @@
-package com.streak.streak;
+package com.streak.streakclient;
 
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 @RestController
 @PreAuthorize("permitAll()")
@@ -21,7 +18,7 @@ public class ReactiveController {
 
     @GetMapping(path = "/")
     public String index () {
-        return "index page";
+        return "Streak-client index page";
     }
 
     @PreAuthorize("permitAll()")

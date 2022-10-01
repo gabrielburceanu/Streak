@@ -1,13 +1,13 @@
-package com.streak.streak;
+package com.streak.streakclient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StreakApplication {
+public class StreakClientApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StreakApplication.class, args);
+		SpringApplication.run(StreakClientApplication.class, args);
 	}
 
 }

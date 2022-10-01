@@ -1,6 +1,6 @@
-package com.streak.streak;
+package com.streak.streakweb;
 
-import com.streak.streak.application.port.in.DistributedMapService;
+import com.streak.streakweb.application.port.in.DistributedMapService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
