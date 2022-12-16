@@ -12,6 +12,9 @@ public class NoSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity security) throws Exception
     {
-        security.httpBasic().disable();
+
+        //security.authorizeRequests().antMatchers("/actuator/**").authenticated().and().httpBasic().and().csrf().disable();
+        security.httpBasic().and().csrf().disable();
+        //security.httpBasic().disable();
     }
 }

@@ -3,6 +3,7 @@ package com.streak.streakweb.adapter.in.web;
 import com.streak.streakweb.application.port.in.CallsCounterService;
 import com.streak.streakweb.application.port.in.DistributedMapService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import java.util.Map;
 @AllArgsConstructor
 @PreAuthorize("permitAll()")
 //@PreAuthorize("isAuthenticated()")
+@Slf4j
 public class ReactiveController {
 
     private final CallsCounterService callsCounterService;
@@ -21,6 +23,10 @@ public class ReactiveController {
 
     @GetMapping(path = "/")
     public String index() {
+        log.info("MESAJ DE INFO");
+        log.debug("MESAJ DE DEBUG");
+        log.error("MESAJ DE ERROR");
+
         String methodMapping = new Object() {
         }.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
         callsCounterService.add(methodMapping);

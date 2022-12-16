@@ -1,0 +1,46 @@
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-ui
+  labels:
+    app: react-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-ui
+  template:
+    metadata:
+      labels:
+        app: react-ui
+    spec:
+      containers:
+        - name: react-ui
+          image: gabidockerid/react-ui:latest
+          imagePullPolicy: Always
+#          env:
+#            - name: STREAK_WEB_URL
+#              value: streak-web
+          ports:
+            - name: http
+              hostPort: 80
+              containerPort: 80
+              protocol: TCP
+            - name: https
+              hostPort: 443
+              containerPort: 443
+              protocol: TCP
+
+---
+# ... Service YAML definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-ui
+spec:
+  selector:
+    app: react-ui
+  ports:
+    - port: 80
+  type: ClusterIP

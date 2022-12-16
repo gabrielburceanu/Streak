@@ -2,7 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: streak
+  name: streak-web
+  labels:
+    app: streak-web
 spec:
   replicas: 1
   selector:
@@ -33,6 +35,7 @@ spec:
   selector:
     app: streak-web
   ports:
-    - port: 80
-      targetPort: 8888
-  type: LoadBalancer
+    - port: 8888
+#    - port: 80
+#      targetPort: 8888
+  type: ClusterIP

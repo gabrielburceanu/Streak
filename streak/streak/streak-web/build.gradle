@@ -11,15 +11,16 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.redisson:redisson:3.17.3'
+	implementation 'org.redisson:redisson:3.17.6'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'io.micrometer:micrometer-registry-prometheus'
-	implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+	implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
 
 	compileOnly 'org.projectlombok:lombok:1.18.24'
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
