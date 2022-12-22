@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-nginx
+spec:
+  selector:
+    matchLabels:
+      app: custom-nginx
+  template:
+    metadata:
+      labels:
+        app: custom-nginx
+    spec:
+      containers:
+        - name: custom-nginx
+          image: gabidockerid/custom-nginx-image:1.0.0
+          ports:
+          - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: custom-nginx
+spec:
+  type: ClusterIP
+  selector:
+    app: custom-nginx
+  ports:
+    - port: 80
+      targetPort: 80
+
+

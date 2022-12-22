@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: streak-web
-          image: gabidockerid/streak-web-image:1.0.0
+          image: gabidockerid/streak-web-image:1.0.1
           ports:
             - containerPort: 8888
 #          env:
