@@ -2,11 +2,10 @@ allprojects{
 	group = 'com.streak'
 }
 
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 subprojects {
 	apply plugin: 'java'
-	sourceCompatibility = '1.8'
 
 	repositories {
 		mavenCentral()

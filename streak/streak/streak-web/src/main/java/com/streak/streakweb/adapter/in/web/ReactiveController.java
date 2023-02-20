@@ -23,9 +23,9 @@ public class ReactiveController {
 
     @GetMapping(path = "/")
     public String index() {
-        log.info("MESAJ DE INFO");
-        log.debug("MESAJ DE DEBUG");
-        log.error("MESAJ DE ERROR");
+        log.info("Info logs enabled");
+        log.debug("Debug logs enabled");
+        log.error("Error logs enabled");
 
         String methodMapping = new Object() {
         }.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
@@ -100,4 +100,9 @@ public class ReactiveController {
         callsCounterService.add(methodMapping);
         return "Who is big admin ?";
     }
+
+//    @GetMapping(path = "/env")
+//    public String env() {
+//        return System.getenv().toString();
+//    }
 }

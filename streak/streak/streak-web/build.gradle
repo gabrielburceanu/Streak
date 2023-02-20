@@ -4,10 +4,16 @@ plugins {
 	id 'java'
 }
 
-version = '0.1.0'
+version = '1.0.2'
 
 repositories {
 	mavenCentral()
+}
+
+java {
+	toolchain {
+		languageVersion.set(JavaLanguageVersion.of(17))
+	}
 }
 
 dependencies {
@@ -32,4 +38,8 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+bootRun {
+	jvmArgs = ["-javaagent:honeycomb-opentelemetry-javaagent.jar", "-Dotel.javaagent.debug=false"]
 }

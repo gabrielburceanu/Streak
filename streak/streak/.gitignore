@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Streak ###
+/kube/.secret.yaml
+/streak-client/.env
+/streak-web/.env

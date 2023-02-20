@@ -2,41 +2,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: streak-web
+  name: streak-client
   labels:
-    app: streak-web
+    app: streak-client
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: streak-web
+      app: streak-client
   template:
     metadata:
       labels:
-        app: streak-web
+        app: streak-client
     spec:
       containers:
-        - name: streak-web
-          image: gabidockerid/streak-web-image:1.0.2
+        - name: streak-client
+          image: gabidockerid/streak-client-image:1.0.0
           ports:
-            - containerPort: 8888
+            - containerPort: 9999
           env:
-            - name: STREAK_CLIENT_ENDPOINT
-              value: http://streak-client:9999/
+            - name: STREAK_WEB_ENDPOINT
+              value: http://streak-web:8888/
             - name: SERVICE_NAME
-              value: streak-web-service
+              value: streak-client-service
             - name: HONEYCOMB_METRICS_DATASET
               value: my-metrics
             - name: HONEYCOMB_CONFIG_FILE
               value: honeycomb.properties
             - name: OTEL_SERVICE_NAME
-              value: streak-web-service
+              value: streak-client-service
             - name: HONEYCOMB_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: honeycomb-secret
                   key: honeycomb-api-key
-
           imagePullPolicy: Always
 
 ---
@@ -44,12 +43,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: streak-web
+  name: streak-client
 spec:
   selector:
-    app: streak-web
+    app: streak-client
   ports:
-    - port: 8888
+    - port: 9999
 #    - port: 80
 #      targetPort: 8888
   type: ClusterIP

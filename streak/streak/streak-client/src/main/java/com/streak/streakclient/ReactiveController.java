@@ -22,11 +22,9 @@ public class ReactiveController {
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping(path = "/number")
-    public Integer number() {
-
-
-        return 	22;
+    @GetMapping(path = "/triple")
+    public Integer triple(@RequestParam(value = "index", defaultValue = "0") String index) {
+        return 3 * Integer.parseInt(index);
     }
 
     @PreAuthorize("permitAll()")
@@ -55,4 +53,10 @@ public class ReactiveController {
     public String getRedisson(@RequestParam String key) {
         return redissonService.get(key);
     }
+
+//    @PreAuthorize("permitAll()")
+//    @GetMapping(path = "/env")
+//    public String getEnv() {
+//        return System.getenv().toString();
+//    }
 }
