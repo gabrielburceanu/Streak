@@ -29,13 +29,6 @@ spec:
                 name: react-ui
                 port:
                   number: 80
-#          - path: /?(zipkin.*)
-#            pathType: Prefix
-#            backend:
-#              service:
-#                name: zipkin-slim
-#                port:
-#                  number: 9411
           - path: /(.*)
             pathType: Prefix
             backend:
