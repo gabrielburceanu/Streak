@@ -1,0 +1,79 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: streak-istio-gateway
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: streak-istio-ingress-virtual-service
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - streak-istio-gateway
+  http:
+    - match:
+        - uri:
+            exact: /nonreactive
+        - uri:
+            exact: /logout
+      route:
+        - destination:
+            host: streak-web
+            port:
+              number: 8888
+    - match:
+        - uri:
+            exact: /triple
+      route:
+        - destination:
+            host: streak-client
+            port:
+              number: 9999
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: react-ui
+            port:
+              number: 80
+---
+apiVersion: security.istio.io/v1
+kind: RequestAuthentication
+metadata:
+  name: jwt-example
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: streak-istio-gateway
+  jwtRules:
+    - issuer: "testing@secure.istio.io"
+      jwksUri: "https://raw.githubusercontent.com/istio/istio/release-1.17/security/tools/jwt/samples/jwks.json"
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: require-jwt
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: streak-istio-gateway
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            requestPrincipals: ["testing@secure.istio.io/testing@secure.istio.io"]
