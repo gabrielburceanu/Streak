@@ -1,20 +1,24 @@
 package com.streak.streakclient;
 
+import com.streak.streakclient.kafka.KafkaOrderConsumer;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @PreAuthorize("permitAll()")
+@AllArgsConstructor
 //@PreAuthorize("isAuthenticated()")
 public class ReactiveController {
 
     RedissonService redissonService;
 
-    public ReactiveController(RedissonService redissonService) {
-        this.redissonService = redissonService;
-    }
+    KafkaOrderConsumer orderConsumer;
+
 
     @GetMapping(path = "/")
     public String index () {
@@ -36,7 +40,7 @@ public class ReactiveController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(path = "/admin")
-    public String adminReactive() {
+    public String admin() {
         return "Who is big admin ?";
     }
 
@@ -59,4 +63,11 @@ public class ReactiveController {
 //    public String getEnv() {
 //        return System.getenv().toString();
 //    }
+
+    @PreAuthorize("permitAll()")
+    @GetMapping(path = "/show-orders")
+    public List<String> showOrders() {
+        return orderConsumer.getOrders();
+    }
+
 }

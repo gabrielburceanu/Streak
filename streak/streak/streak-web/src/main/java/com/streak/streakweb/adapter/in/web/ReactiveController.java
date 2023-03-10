@@ -2,8 +2,9 @@ package com.streak.streakweb.adapter.in.web;
 
 import com.streak.streakweb.application.port.in.CallsCounterService;
 import com.streak.streakweb.application.port.in.DistributedMapService;
-import lombok.AllArgsConstructor;
+import com.streak.streakweb.kafka.OrderEventProducer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@AllArgsConstructor
 @PreAuthorize("permitAll()")
 //@PreAuthorize("isAuthenticated()")
 @Slf4j
@@ -20,6 +20,13 @@ public class ReactiveController {
 
     private final CallsCounterService callsCounterService;
     private final DistributedMapService redissonService;
+    private final OrderEventProducer kafkaProducer;
+
+    public ReactiveController(CallsCounterService callsCounterService, DistributedMapService redissonService, OrderEventProducer kafkaProducer) {
+        this.callsCounterService = callsCounterService;
+        this.redissonService = redissonService;
+        this.kafkaProducer = kafkaProducer;
+    }
 
     @GetMapping(path = "/")
     public String index() {
@@ -45,7 +52,7 @@ public class ReactiveController {
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping(path = "/push")
+    @GetMapping(path = "v1/push")
     public String redisson(@RequestParam String key, @RequestParam String value) {
         redissonService.put(key, value);
 
@@ -53,7 +60,7 @@ public class ReactiveController {
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping(path = "/get")
+    @GetMapping(path = "v1/get")
     public String getRedisson(@RequestParam String key) {
         return redissonService.get(key);
     }
@@ -90,7 +97,6 @@ public class ReactiveController {
         return response.toString();
     }
 
-
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(path = "/admin")
     public String adminReactive() {
@@ -101,8 +107,17 @@ public class ReactiveController {
         return "Who is big admin ?";
     }
 
-//    @GetMapping(path = "/env")
-//    public String env() {
-//        return System.getenv().toString();
-//    }
+    @GetMapping(path = "/env")
+    public String env() {
+        return System.getenv().toString();
+    }
+
+    @Value("${spring.kafka.topic.name}")
+    private String ordersTopic;
+    @GetMapping(path = "/order-kafka")
+    public String orderKafka() {
+        kafkaProducer.sendKafkaEvent(ordersTopic, "fix", "my-code");
+
+        return "done";
+    }
 }

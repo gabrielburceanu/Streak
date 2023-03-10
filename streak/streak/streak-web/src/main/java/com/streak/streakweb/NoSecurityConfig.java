@@ -1,20 +1,26 @@
-package com.streak.streakweb;
-
-import org.springframework.core.annotation.Order;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
-@EnableWebSecurity
-@Order(1)
-public class NoSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Override
-    protected void configure(HttpSecurity security) throws Exception
-    {
-
-        //security.authorizeRequests().antMatchers("/actuator/**").authenticated().and().httpBasic().and().csrf().disable();
-        security.httpBasic().and().csrf().disable();
-        //security.httpBasic().disable();
-    }
-}
+//package com.streak.streakweb;
+//
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.core.annotation.Order;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.web.SecurityFilterChain;
+//
+//import static org.springframework.security.config.Customizer.withDefaults;
+//
+//@Order(1)
+//@Configuration
+//public class NoSecurityConfig {
+//
+//
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeHttpRequests((authz) -> authz
+//                        .anyRequest().permitAll()
+//                ).csrf().disable()
+//                .httpBasic(withDefaults());
+//        return http.build();
+//    }
+//
+//}

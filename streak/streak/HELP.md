@@ -78,8 +78,13 @@ kubectl logs streak-5986467d4-zvlmk
 
 
 #kafka
-echo "hello world!" | kafkacat -P -b 10.109.19.33:9092 -t test
+kubernetes:
+    echo "hello world!" | kafkacat -P -b 10.109.19.33:9092 -t test
 
-dsfs
+local:
+    $ docker exec -t kafka-docker-kafka-1 kafka-topics.sh --bootstrap-server :9092 --list
+    $ docker exec -t kafka-docker-kafka-1 kafka-console-consumer.sh --topic=streak-orders --bootstrap-server="host.docker.internal:53732"
+
+
 #istio
 kubectl label namespace default istio-injection=enabled
