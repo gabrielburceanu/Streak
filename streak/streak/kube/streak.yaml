@@ -1,4 +1,3 @@
-# ... Deployment YAML definition
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,6 +20,10 @@ spec:
           ports:
             - containerPort: 8888
           env:
+            - name: logging.level.org.apache.kafka
+              value: DEBUG
+            - name: spring.kafka.bootstrap-servers
+              value: tcp://kafka-service.kafka.svc.cluster.local:9092
             - name: STREAK_CLIENT_ENDPOINT
               value: http://streak-client:9999/
             - name: SERVICE_NAME
@@ -40,7 +43,6 @@ spec:
           imagePullPolicy: Always
 
 ---
-# ... Service YAML definition
 apiVersion: v1
 kind: Service
 metadata:
@@ -50,6 +52,4 @@ spec:
     app: streak-web
   ports:
     - port: 8888
-#    - port: 80
-#      targetPort: 8888
   type: ClusterIP

@@ -25,7 +25,7 @@ public class OrderEventProducer {
         try (BackgroundEventSource eventSource = backgroundBuilder.build()) {
             eventSource.start();
             try {
-                TimeUnit.SECONDS.sleep(10);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

@@ -36,8 +36,8 @@ kubectl exec react-ui-6496df94fc-q6vqp -- curl streak-web:80
 #streak
 run gradle build task
 cd /c/code/kube_demo/streak/streak/steak-web
-docker build -t gabidockerid/streak-web-image:1.0.1 .
-docker push gabidockerid/streak-web-image:1.0.1
+docker build -t gabidockerid/streak-web-image:1.0.2 .
+docker push gabidockerid/streak-web-image:1.0.2
 push the image to the docker repository "gabidockerid"
 
 cd /c/code/kube_demo/streak/streak

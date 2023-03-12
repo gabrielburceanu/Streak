@@ -27,6 +27,10 @@ spec:
         - uri:
             exact: /nonreactive
         - uri:
+            exact: /order-kafka
+        - uri:
+             exact: /token
+        - uri:
             exact: /logout
       route:
         - destination:
@@ -36,6 +40,10 @@ spec:
     - match:
         - uri:
             exact: /triple
+        - uri:
+            exact: /show-orders
+        - uri:
+            exact: /token-client
       route:
         - destination:
             host: streak-client
