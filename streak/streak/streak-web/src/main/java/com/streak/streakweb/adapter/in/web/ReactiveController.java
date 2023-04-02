@@ -6,6 +6,7 @@ import com.streak.streakweb.kafka.OrderEventProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +31,8 @@ public class ReactiveController {
 
     @GetMapping(path = "/")
     public String index() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         log.info("Info logs enabled");
         log.debug("Debug logs enabled");
         log.error("Error logs enabled");

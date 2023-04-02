@@ -47,7 +47,7 @@ public class ReactiveController {
     @PreAuthorize("permitAll()")
     @GetMapping(path = "/push")
     public String redisson(@RequestParam String key, @RequestParam String value) {
-        redissonService.push(key, value);
+        redissonService.put(key, value);
 
         return "Pushed";
     }

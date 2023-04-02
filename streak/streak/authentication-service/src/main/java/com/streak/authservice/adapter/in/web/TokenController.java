@@ -1,4 +1,4 @@
-package com.streak.streakweb.adapter.in.web;
+package com.streak.authservice.adapter.in.web;
 
 import java.time.Instant;
 import java.util.stream.Collectors;

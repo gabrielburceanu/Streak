@@ -1,0 +1,50 @@
+plugins {
+	id 'org.springframework.boot' version '3.0.3'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id 'java'
+}
+
+version = '1.0.0'
+
+repositories {
+	mavenCentral()
+}
+
+java {
+	toolchain {
+		languageVersion.set(JavaLanguageVersion.of(17))
+	}
+}
+
+dependencies {
+	implementation platform('io.micrometer:micrometer-tracing-bom:latest.release')
+	implementation 'io.micrometer:micrometer-tracing'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'org.springframework.kafka:spring-kafka:3.0.4'
+	implementation 'org.redisson:redisson:3.17.6'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'io.micrometer:micrometer-registry-prometheus'
+	implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+	implementation 'com.launchdarkly:okhttp-eventsource:4.1.0'
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.14.2'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+
+	compileOnly 'org.projectlombok:lombok:1.18.24'
+	annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+}
+
+test {
+	useJUnitPlatform()
+}
+
+bootRun {
+	jvmArgs = ["-javaagent:honeycomb-opentelemetry-javaagent.jar", "-Dotel.javaagent.debug=false"]
+}

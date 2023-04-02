@@ -1,5 +1,6 @@
-package com.streak.streakclient;
+package com.streak.authservice.adapter.in.redisson;
 
+import com.streak.authservice.application.port.in.DistributedMapService;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -11,11 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-//import org.redisson.*;
 
 @Slf4j
 @Service
-public class RedissonService {
+public class RedissonService implements DistributedMapService {
 
     private final String redisUrl;
     private ConcurrentMap<String, String> map;
@@ -50,10 +50,12 @@ public class RedissonService {
 ////        config = Config.fromYAML(new File("config-file.yaml"));
     }
 
+    @Override
     public void put(String key, String value) {
         map.put(key, value);
     }
 
+    @Override
     public String get(String key) {
         return map.get(key);
     }

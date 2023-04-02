@@ -8,5 +8,6 @@ pluginManagement {
 rootProject.name = 'streak-root'
 include(':streak-web')
 include(':streak-client')
+include(':authentication-service')
 include(':serverless')
 

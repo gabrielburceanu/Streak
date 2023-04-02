@@ -22,6 +22,8 @@ spec:
           env:
             - name: logging.level.org.apache.kafka
               value: DEBUG
+            - name: redis.url
+              value: http://redis:6379
             - name: spring.kafka.bootstrap-servers
               value: tcp://kafka-service.kafka.svc.cluster.local:9092
             - name: STREAK_WEB_ENDPOINT
