@@ -4,6 +4,7 @@ import com.launchdarkly.eventsource.EventSource;
 import com.launchdarkly.eventsource.background.BackgroundEventHandler;
 import com.launchdarkly.eventsource.background.BackgroundEventSource;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 @AllArgsConstructor
 @Service
+@Profile("kafka")
 public class OrderEventProducer {
     KafkaTemplate<String, String> kafkaTemplate;
 

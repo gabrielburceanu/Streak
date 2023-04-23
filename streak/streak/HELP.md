@@ -88,3 +88,9 @@ local:
 
 #istio
 kubectl label namespace default istio-injection=enabled
+
+
+#mongo
+local with docker:
+    docker compose up
+    mongosh --host localhost --port 27017 -u root -p

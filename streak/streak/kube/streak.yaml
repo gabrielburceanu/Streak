@@ -20,6 +20,8 @@ spec:
           ports:
             - containerPort: 8888
           env:
+            - name: spring.profiles.active
+              value: kafka
             - name: logging.level.org.apache.kafka
               value: DEBUG
             - name: redis.url

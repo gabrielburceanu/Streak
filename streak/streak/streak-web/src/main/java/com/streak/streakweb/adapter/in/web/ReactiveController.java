@@ -2,9 +2,8 @@ package com.streak.streakweb.adapter.in.web;
 
 import com.streak.streakweb.application.port.in.CallsCounterService;
 import com.streak.streakweb.application.port.in.DistributedMapService;
-import com.streak.streakweb.kafka.OrderEventProducer;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,17 +16,11 @@ import java.util.Map;
 @PreAuthorize("permitAll()")
 //@PreAuthorize("isAuthenticated()")
 @Slf4j
+@AllArgsConstructor
 public class ReactiveController {
 
     private final CallsCounterService callsCounterService;
     private final DistributedMapService redissonService;
-    private final OrderEventProducer kafkaProducer;
-
-    public ReactiveController(CallsCounterService callsCounterService, DistributedMapService redissonService, OrderEventProducer kafkaProducer) {
-        this.callsCounterService = callsCounterService;
-        this.redissonService = redissonService;
-        this.kafkaProducer = kafkaProducer;
-    }
 
     @GetMapping(path = "/")
     public String index() {
@@ -100,6 +93,12 @@ public class ReactiveController {
         return response.toString();
     }
 
+//    @PreAuthorize("hasAuthority('appr')")
+//    @GetMapping(path = "/approle")
+//    public String approle() {
+//        return "HasAppRole!!!";
+//    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(path = "/admin")
     public String adminReactive() {
@@ -108,19 +107,5 @@ public class ReactiveController {
         }.getClass().getEnclosingMethod().getAnnotation(GetMapping.class).path()[0];
         callsCounterService.add(methodMapping);
         return "Who is big admin ?";
-    }
-
-    @GetMapping(path = "/env")
-    public String env() {
-        return System.getenv().toString();
-    }
-
-    @Value("${spring.kafka.topic.name}")
-    private String ordersTopic;
-    @GetMapping(path = "/order-kafka")
-    public String orderKafka() {
-        kafkaProducer.sendKafkaEvent(ordersTopic, "fix", "my-code");
-
-        return "done";
     }
 }
