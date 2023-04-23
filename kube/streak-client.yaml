@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streak-client
+  labels:
+    app: streak-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: streak-client
+  template:
+    metadata:
+      labels:
+        app: streak-client
+    spec:
+      containers:
+        - name: streak-client
+          image: gabidockerid/streak-client-image:1.0.0
+          ports:
+            - containerPort: 9999
+          env:
+            - name: spring.profiles.active
+              value: kafka
+            - name: logging.level.org.apache.kafka
+              value: DEBUG
+            - name: redis.url
+              value: http://redis:6379
+            - name: spring.kafka.bootstrap-servers
+              value: tcp://kafka-service.kafka.svc.cluster.local:9092
+            - name: STREAK_WEB_ENDPOINT
+              value: http://streak-web:8888/
+            - name: SERVICE_NAME
+              value: streak-client-service
+            - name: HONEYCOMB_METRICS_DATASET
+              value: my-metrics
+            - name: HONEYCOMB_CONFIG_FILE
+              value: honeycomb.properties
+            - name: OTEL_SERVICE_NAME
+              value: streak-client-service
+            - name: HONEYCOMB_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: honeycomb-secret
+                  key: honeycomb-api-key
+          imagePullPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streak-client
+spec:
+  selector:
+    app: streak-client
+  ports:
+    - port: 9999
+  type: ClusterIP
