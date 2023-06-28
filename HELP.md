@@ -91,9 +91,15 @@ kubectl label namespace default istio-injection=enabled
 
 
 #mongo
+kubernetes:
+    mongosh --host localhost --port 27017 --authenticationDatabase streak -u <authuser> -p <authpass>
 local with docker:
     docker compose up
     mongosh --host localhost --port 27017 -u root -p
+    
+use streak
+show collections
+show users
 
 
 #authentication-service

@@ -38,14 +38,15 @@ out/
 ### Streak ###
 kube/.secret.yaml
 
-streak-client/.env
-streak-client/src/main/resources/app.key
-streak-client/src/main/resources/app.pub
+/streak-client/.env
+/streak-client/src/main/resources/app.key
+/streak-client/src/main/resources/app.pub
 
-streak-web/.env
-streak-web/src/main/resources/app.key
-streak-web/src/main/resources/app.pub
+/streak-web/.env
+/streak-web/src/main/resources/app.key
+/streak-web/src/main/resources/app.pub
 
-authentication-service/.env
-authentication-service/src/main/resources/app.key
-authentication-service/src/main/resources/app.pub
+/authentication-service/.env
+/authentication-service/src/main/resources/app.key
+/authentication-service/src/main/resources/app.pub
+/docker-compose/.env
