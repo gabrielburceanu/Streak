@@ -1,4 +1,4 @@
-package com.streak.streakweb.adapter.in.web;
+package com.streak.streakweb.applicationservice;
 
 
 public class DummyClass {

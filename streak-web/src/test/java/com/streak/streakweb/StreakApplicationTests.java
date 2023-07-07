@@ -1,6 +1,6 @@
 package com.streak.streakweb;
 
-import com.streak.streakweb.application.port.in.DistributedMapService;
+import com.streak.streakweb.domain.DistributedMapRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +14,7 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
 class StreakApplicationTests {
 
 	@Autowired
-	DistributedMapService distributedMapService;
+	DistributedMapRepository distributedMapRepository;
 
 	@Test
 	void contextLoads() {
@@ -26,8 +26,8 @@ class StreakApplicationTests {
 		Integer first = Flux.fromArray(new Integer[]{1, 2, 3}).blockFirst();
 		System.out.println(first);
 
-		distributedMapService.put("firstTestKey", "result");
-		assertEquals("MapService not working", distributedMapService.get("firstTestKey"), "result");
+		distributedMapRepository.put("firstTestKey", "result");
+		assertEquals("MapService not working", distributedMapRepository.get("firstTestKey"), "result");
 	}
 
 }

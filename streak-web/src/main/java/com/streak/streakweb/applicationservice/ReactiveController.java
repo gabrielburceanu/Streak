@@ -1,7 +1,7 @@
-package com.streak.streakweb.adapter.in.web;
+package com.streak.streakweb.applicationservice;
 
-import com.streak.streakweb.application.port.in.CallsCounterService;
-import com.streak.streakweb.application.port.in.DistributedMapService;
+import com.streak.streakweb.domain.CallsCounterService;
+import com.streak.streakweb.domain.DistributedMapRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +20,7 @@ import java.util.Map;
 public class ReactiveController {
 
     private final CallsCounterService callsCounterService;
-    private final DistributedMapService redissonService;
+    private final DistributedMapRepository redissonService;
 
     @GetMapping(path = "/")
     public String index() {

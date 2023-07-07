@@ -1,4 +1,4 @@
-package com.streak.streakweb.kafka;
+package com.streak.streakweb.infra.kafka;
 
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;

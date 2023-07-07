@@ -1,4 +1,4 @@
-package com.streak.streakweb.kafka;
+package com.streak.streakweb.infra.kafka;
 
 import com.launchdarkly.eventsource.EventSource;
 import com.launchdarkly.eventsource.background.BackgroundEventHandler;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 @Profile("kafka")
 public class OrderEventProducer {
-    KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendKafkaEvent(String topic, String key, String value) {
         BackgroundEventHandler eventHandler = new OrderHandler(kafkaTemplate, topic);

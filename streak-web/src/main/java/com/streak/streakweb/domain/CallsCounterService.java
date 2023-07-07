@@ -1,4 +1,4 @@
-package com.streak.streakweb.application.port.in;
+package com.streak.streakweb.domain;
 
 import java.util.Map;
 

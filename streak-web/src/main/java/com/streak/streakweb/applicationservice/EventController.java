@@ -1,6 +1,6 @@
-package com.streak.streakweb.adapter.in.web;
+package com.streak.streakweb.applicationservice;
 
-import com.streak.streakweb.kafka.OrderEventProducer;
+import com.streak.streakweb.infra.kafka.OrderEventProducer;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

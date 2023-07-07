@@ -1,20 +1,19 @@
-package com.streak.streakweb.micrometer;
+package com.streak.streakweb.infra.micrometer;
 
-import com.streak.streakweb.application.port.in.CallsCounterService;
+import com.streak.streakweb.domain.CallsCounterService;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 @Service
 @AllArgsConstructor
 public class MicrometerCallsCounterService implements CallsCounterService {
     private final MeterRegistry meterRegistry;
-    private final Map<String, Integer> urlCount = new ConcurrentHashMap<>();
+    private final Map<String, Integer> urlCount;
 
     @Override
     public synchronized void add(String url) {

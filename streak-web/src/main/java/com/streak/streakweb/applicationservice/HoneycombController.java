@@ -1,4 +1,4 @@
-package com.streak.streakweb.adapter.in.web;
+package com.streak.streakweb.applicationservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

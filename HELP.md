@@ -103,6 +103,12 @@ show users
 
 
 #authentication-service
+run gradle build task
+cd /c/code/kube_demo/authentication-service
+docker build -t gabidockerid/auth-service-image:1.0.0 .
+docker push gabidockerid/auth-service-image:1.0.0
+push the image to the docker repository "gabidockerid"
+
 Required extra enviroment variables
     HONEYCOMB_API_KEY
     OTEL_SERVICE_NAME

@@ -1,4 +1,4 @@
-package com.streak.streakweb.kafka;
+package com.streak.streakweb.infra.kafka;
 
 
 import com.launchdarkly.eventsource.MessageEvent;
@@ -15,11 +15,11 @@ public class OrderHandler implements BackgroundEventHandler {
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final String topic;
     @Override
-    public void onOpen() throws Exception {
+    public void onOpen() {
     }
 
     @Override
-    public void onClosed() throws Exception {
+    public void onClosed() {
 
     }
 
@@ -30,7 +30,7 @@ public class OrderHandler implements BackgroundEventHandler {
     }
 
     @Override
-    public void onComment(String comment) throws Exception {
+    public void onComment(String comment) {
 
     }
 
