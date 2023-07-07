@@ -25,13 +25,17 @@ spec:
   http:
     - match:
         - uri:
+            exact: /token
+      route:
+        - destination:
+            host: auth-service
+            port:
+              number: 7777
+    - match:
+        - uri:
             exact: /nonreactive
         - uri:
             exact: /order-kafka
-        - uri:
-             exact: /token
-        - uri:
-            exact: /logout
       route:
         - destination:
             host: streak-web
@@ -42,8 +46,6 @@ spec:
             exact: /triple
         - uri:
             exact: /show-orders
-        - uri:
-            exact: /token-client
       route:
         - destination:
             host: streak-client

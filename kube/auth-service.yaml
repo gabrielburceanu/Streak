@@ -35,6 +35,21 @@ spec:
                 secretKeyRef:
                   name: honeycomb-secret
                   key: honeycomb-api-key
+            - name: spring.data.mongodb.username
+              valueFrom:
+                secretKeyRef:
+                  name: auth-mongo-secret
+                  key: MONGO_AUTH_USER
+            - name: spring.data.mongodb.password
+              valueFrom:
+                secretKeyRef:
+                  name: auth-mongo-secret
+                  key: MONGO_AUTH_PASS
+            - name: spring.data.mongodb.host
+              value: "mongo-auth-service"
+            - name: spring.data.mongodb.conn
+              value: "mongodb://authserviceuser:authservicepass@mongo-auth-service.default.svc.cluster.local:27017/streak"
+              #value: "mongodb+srv://authserviceuser:authservicepass@mongo-auth-service.default.svc.cluster.local:27017/streak"
 
           imagePullPolicy: Always
 

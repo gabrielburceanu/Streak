@@ -136,3 +136,15 @@ spec:
         - name: "auth-mongo-data-dir"
           persistentVolumeClaim:
             claimName: "auth-mongo-data-pv-claim"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-auth-service
+spec:
+  selector:
+    app: mongo-auth-service
+  ports:
+    - port: 27017
+  type: ClusterIP
