@@ -35,7 +35,7 @@ kubectl exec react-ui-6496df94fc-q6vqp -- curl streak-web:80
 
 #streak
 run gradle build task
-cd /c/code/kube_demo/streak/streak/steak-web
+cd /c/code/kube_demo/steak-web
 docker build -t gabidockerid/streak-web-image:1.0.2 .
 docker push gabidockerid/streak-web-image:1.0.2
 push the image to the docker repository "gabidockerid"
@@ -91,7 +91,7 @@ kubectl label namespace default istio-injection=enabled
 
 
 #mongo
-kubernetes:
+kuberne
     mongosh --host localhost --port 27017 --authenticationDatabase streak -u <authuser> -p <authpass>
 local with docker:
     docker compose up

@@ -144,7 +144,9 @@ metadata:
   name: mongo-auth-service
 spec:
   selector:
-    app: mongo-auth-service
+    app: auth-mongodb
   ports:
-    - port: 27017
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
   type: ClusterIP

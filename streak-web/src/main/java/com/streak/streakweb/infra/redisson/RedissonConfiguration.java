@@ -37,7 +37,7 @@ public class RedissonConfiguration {
 ////// or read config from fileorg.redisson
 ////        config = Config.fromYAML(new File("config-file.yaml"));
         }
-        catch (RedisConnectionException ex) {
+        catch (RedisConnectionException | IllegalArgumentException ex) {
             log.error("Redis failed to connect, using mock");
             return new ConcurrentHashMap<>();
         }
