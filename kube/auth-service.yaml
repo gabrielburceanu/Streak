@@ -47,9 +47,6 @@ spec:
                   key: MONGO_AUTH_PASS
             - name: spring.data.mongodb.host
               value: "mongo-auth-service"
-            - name: spring.data.mongodb.conn
-              value: "mongodb://authserviceuser:authservicepass@mongo-auth-service.default.svc.cluster.local:27017/streak"
-              #value: "mongodb+srv://authserviceuser:authservicepass@mongo-auth-service.default.svc.cluster.local:27017/streak"
 
           imagePullPolicy: Always
 

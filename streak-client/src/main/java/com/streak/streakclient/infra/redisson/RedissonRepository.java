@@ -1,6 +1,6 @@
-package com.streak.streakweb.infra.redisson;
+package com.streak.streakclient.infra.redisson;
 
-import com.streak.streakweb.domain.DistributedMapRepository;
+import com.streak.streakclient.domain.DistributedMapRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;

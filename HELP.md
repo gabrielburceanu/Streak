@@ -46,7 +46,7 @@ kubectl delete -f kube
 
 #streak-client
 run gradle build task
-cd /c/code/kube_demo/streak/streak/streak-client
+cd /c/code/kube_demo/streak-client
 docker build -t gabidockerid/streak-client-image:1.0.0 .
 docker push gabidockerid/streak-client-image:1.0.0
 push the image to the docker repository "gabidockerid"

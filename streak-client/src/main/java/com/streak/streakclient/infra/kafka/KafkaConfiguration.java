@@ -1,4 +1,4 @@
-package com.streak.streakclient.kafka;
+package com.streak.streakclient.infra.kafka;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

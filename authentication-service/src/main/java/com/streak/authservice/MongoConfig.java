@@ -32,13 +32,10 @@ public class MongoConfig {
     @Value("${spring.data.mongodb.database}")
     private String database;
 
-    @Value("${spring.data.mongodb.conn}")
-    private String connectionUrl;
-
     @Bean
     public MongoClient mongo() {
-        //String connectionUrl = "mongodb://" + username + ":" + password + "@" + host + ":" + port + "/" + database;
-        log.info("Mongo connection String {}", connectionUrl);
+        String connectionUrl = "mongodb://" + username + ":" + password + "@" + host + ":" + port + "/" + database;
+
         ConnectionString connectionString = new ConnectionString(connectionUrl);
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
@@ -52,7 +49,7 @@ public class MongoConfig {
     }
 
     @Bean
-    public MongoTemplate mongoTemplate() throws Exception {
+    public MongoTemplate mongoTemplate() {
         return new MongoTemplate(mongo(), database);
     }
 }

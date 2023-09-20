@@ -2,19 +2,20 @@ package com.streak.streakweb.applicationservice;
 
 import com.streak.streakweb.domain.CallsCounterService;
 import com.streak.streakweb.domain.DistributedMapRepository;
+import com.streak.streakweb.dto.Person;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
-@PreAuthorize("permitAll()")
-//@PreAuthorize("isAuthenticated()")
+@RequestMapping(path =  "api/v1")
 @Slf4j
 @AllArgsConstructor
 public class ReactiveController {
@@ -22,7 +23,7 @@ public class ReactiveController {
     private final CallsCounterService callsCounterService;
     private final DistributedMapRepository redissonService;
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "")
     public String index() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -48,7 +49,7 @@ public class ReactiveController {
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping(path = "v1/push")
+    @GetMapping(path = "push")
     public String redisson(@RequestParam String key, @RequestParam String value) {
         redissonService.put(key, value);
 
@@ -56,7 +57,7 @@ public class ReactiveController {
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping(path = "v1/get")
+    @GetMapping(path = "get")
     public String getRedisson(@RequestParam String key) {
         return redissonService.get(key);
     }
@@ -93,12 +94,6 @@ public class ReactiveController {
         return response.toString();
     }
 
-//    @PreAuthorize("hasAuthority('appr')")
-//    @GetMapping(path = "/approle")
-//    public String approle() {
-//        return "HasAppRole!!!";
-//    }
-
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(path = "/admin")
     public String adminReactive() {
@@ -108,4 +103,11 @@ public class ReactiveController {
         callsCounterService.add(methodMapping);
         return "Who is big admin ?";
     }
+
+    @PostMapping(path = "/persons")
+    public ResponseEntity<String> createPerson(@RequestBody @Validated Person person) {
+        log.info("Here we should create a person: {}", person.toString());
+        return new ResponseEntity<>("Didn't really create it.", HttpStatus.CREATED);
+    }
+
 }
